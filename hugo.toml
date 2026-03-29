@@ -1,0 +1,7 @@
+baseURL = 'https://dredd-13.github.io/'
+locale = 'es-ES'
+title = 'Dredd'
+theme = "PaperMod"
+
+[params]
+  homeInfoParams = {Title = "Hola 👋", Content = "Bienvenido a mi blog"}
