@@ -275,7 +275,7 @@
         <div class="post-main">
           <div class="post-title">{{ .Title }}</div>
           <div class="post-date"><span>{{ .Date.Format "2006-01-02" }}</span></div>
-          {{ with .Summary }}<div class="post-summary">{{ . }}</div>{{ end }}
+          {{ with .Description }}<div class="post-summary">{{ . }}</div>{{ end }}
         </div>
         {{ with .Params.tags }}
         <div class="post-tags">

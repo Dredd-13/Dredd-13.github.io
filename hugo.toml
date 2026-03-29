@@ -6,3 +6,5 @@ theme = "PaperMod"
 [params]
   hideFooter = true
   defaultTheme = "dark"
+  ShowToc = true
+  TocOpen= true
