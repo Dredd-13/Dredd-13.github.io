@@ -6,8 +6,3 @@ theme = "PaperMod"
 [params]
   hideFooter = true
   defaultTheme = "dark"
-
-[[menus.main]]
-  name = "Whoami"
-  url = "/whoami"
-  weight = 1

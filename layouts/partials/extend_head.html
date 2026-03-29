@@ -1,0 +1,30 @@
+<style>
+.logo a {
+  display: flex ;
+  align-items: center ;
+  gap: 10px ;
+}
+.logo a::before {
+  content: "";
+  display: inline-block ;
+  width: 125px ;
+  height: 125px ;
+  border-radius: 50% ;
+  background-image: url('/images/avatar.png') ;
+  background-size: cover ;
+  background-position: center ;
+  flex-shrink: 0 ;
+}
+
+/* Mover el header a la izquierda */
+.header {
+  justify-content: flex-start ;
+  padding-top: 20px
+}
+.nav {
+  width: 100% ;
+  max-width: 100% ;
+  justify-content: flex-start ;
+  padding: 0 30px ;
+}
+</style>
