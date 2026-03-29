@@ -255,6 +255,17 @@
       </div>
     </div>
 
+     <!-- Categorías -->
+    <div class="cats-section">
+      <a href="/tags" class="certs-title">Categorías</a>
+      {{ range .Site.Taxonomies.tags.ByCount }}
+      <div class="cert-card" style="cursor:pointer;" onclick="location.href='/tags/{{ .Page.Title | urlize }}'">
+        <div class="cert-name">{{ .Page.Title }}</div>
+        <div class="cert-date">{{ .Count }} {{ if eq .Count 1 }}post{{ else }}posts{{ end }}</div>
+      </div>
+      {{ end }}
+    </div>
+
   </aside>
 
   <!-- ── DIVIDER ── -->
