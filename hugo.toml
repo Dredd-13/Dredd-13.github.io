@@ -4,4 +4,10 @@ title = 'Dredd'
 theme = "PaperMod"
 
 [params]
-  homeInfoParams = {Title = "Hola 👋", Content = "Bienvenido a mi blog"}
+  hideFooter = true
+  defaultTheme = "dark"
+
+[[menus.main]]
+  name = "Whoami"
+  url = "/whoami"
+  weight = 1

@@ -1,0 +1,73 @@
+{{ define "main" }}
+<style>
+.certs-page {
+  max-width: 800px;
+  margin: 40px auto;
+  font-family: 'Courier New', monospace;
+  padding: 0 20px;
+}
+.certs-page-title {
+  color: #50fa7b;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 40px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #2d2d2d;
+}
+.certs-page-title span { color: #6272a4; }
+.cert-full-card {
+  background: #1a1a1a;
+  border: 1px solid #2d2d2d;
+  border-radius: 8px;
+  padding: 30px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: border-color 0.2s;
+}
+.cert-full-card:hover { border-color: #50fa7b; }
+.cert-full-img {
+  width: 500px;
+  height: 500px;
+  object-fit: contain;
+  margin-bottom: 20px;
+}
+.cert-full-name {
+  color: #e0e0e0;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+.cert-full-issuer {
+  color: #6272a4;
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+.cert-full-date {
+  color: #f1fa8c;
+  font-size: 12px;
+}
+</style>
+
+<div class="certs-page">
+  <div class="certs-page-title"><span># </span>Certificaciones</div>
+
+  <div class="cert-full-card">
+    <img class="cert-full-img" src="/images/ejpt.png" alt="eJPT"/>
+    <div class="cert-full-name">eJPT</div>
+    <div class="cert-full-issuer">eLearnSecurity / INE</div>
+    <div class="cert-full-date">Mayo 2025</div>
+  </div>
+
+  <div class="cert-full-card">
+    <img class="cert-full-img" src="/images/ewpt.png" alt="eWPT"/>
+    <div class="cert-full-name">eWPT</div>
+    <div class="cert-full-issuer">eLearnSecurity / INE</div>
+    <div class="cert-full-date">Diciembre 2025</div>
+  </div>
+
+</div>
+{{ end }}
