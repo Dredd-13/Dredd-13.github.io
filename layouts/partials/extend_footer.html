@@ -1,0 +1,86 @@
+<!-- ============================================
+     DREDD-13 BINARY WAVE EFFECT
+     Efecto de corrupción binaria estilo Matrix
+     Solo se carga en la homepage
+     ============================================ -->
+
+{{ if .IsHome }}
+<script>
+(function() {
+  'use strict';
+  
+  const normalArt = document.getElementById('ascii-normal');
+  const binaryArt = document.getElementById('ascii-binary');
+  
+  if (!normalArt || !binaryArt) return;
+  
+  const originalText = normalArt.textContent;
+  let animationId = null;
+  
+  // Genera el texto binario con efecto de onda
+  function generateBinaryWave() {
+    const time = Date.now();
+    let result = '';
+    
+    for (let i = 0; i < originalText.length; i++) {
+      const char = originalText[i];
+      
+      // Preservar espacios y saltos de línea
+      if (char === ' ' || char === '\n') {
+        result += char;
+        continue;
+      }
+      
+      // Efecto de onda: usa seno para crear patrón ondulante
+      const wave = Math.sin((time / 120) + (i / 4));
+      result += wave > 0 ? '1' : '0';
+    }
+    
+    return result;
+  }
+  
+  // Loop de animación
+  function animate() {
+    binaryArt.textContent = generateBinaryWave();
+    animationId = requestAnimationFrame(animate);
+  }
+  
+  // Iniciar animación al hacer hover
+  const container = document.getElementById('ascii-container');
+  
+  container.addEventListener('mouseenter', function() {
+    if (!animationId) {
+      animate();
+    }
+  });
+  
+  container.addEventListener('mouseleave', function() {
+    if (animationId) {
+      cancelAnimationFrame(animationId);
+      animationId = null;
+    }
+  });
+  
+  // Soporte para touch en móviles
+  container.addEventListener('touchstart', function() {
+    if (!animationId) {
+      animate();
+    }
+  }, { passive: true });
+  
+  container.addEventListener('touchend', function() {
+    // Pequeño delay antes de detener en móviles
+    setTimeout(function() {
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+        animationId = null;
+      }
+    }, 1000);
+  }, { passive: true });
+  
+  // Generar estado inicial
+  binaryArt.textContent = generateBinaryWave();
+  
+})();
+</script>
+{{ end }}

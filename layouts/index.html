@@ -1,324 +1,94 @@
-{{ define "main" }}
-<style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+{{- define "main" }}
 
-.main {
-  max-width: 100%;
-  padding: 0;
-}
+<!-- ============================================
+     DREDD-13 HERO SECTION
+     Avatar + ASCII Art con efecto binario
+     ============================================ -->
 
-.blog-layout {
-  display: flex;
-  min-height: calc(100vh - 60px);
-  max-width: 1200px;
-  margin: 0;
-  padding: 30px 20px 30px 30px;
-  gap: 0;
-  font-family: 'Courier New', monospace;
-}
-
-/* ── SIDEBAR ── */
-.sidebar {
-  width: 260px;
-  flex-shrink: 0;
-  padding-right: 30px;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.sidebar-nav a {
-  display: block;
-  color: #50fa7b;
-  text-decoration: none;
-  font-size: 13px;
-  padding: 4px 0;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  transition: color 0.2s;
-}
-.sidebar-nav a:hover { color: #f1fa8c; }
-.sidebar-nav a::before { content: "→ "; color: #6272a4; }
-
-/* Mini terminal */
-.mini-terminal {
-  background: #1a1a1a;
-  border: 1px solid #2d2d2d;
-  border-radius: 8px;
-  overflow: hidden;
-}
-.mini-terminal-header {
-  background: #2d2d2d;
-  padding: 7px 12px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-.dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
-.dot.r { background: #ff5f57; }
-.dot.y { background: #ffbd2e; }
-.dot.g { background: #28ca41; }
-.mini-terminal-title { color: #666; font-size: 11px; margin-left: 6px; }
-.mini-terminal-body { padding: 14px; }
-.mt-prompt { color: #50fa7b; font-size: 11px; margin-bottom: 10px; }
-.mt-prompt span { color: #f1fa8c; }
-.mt-section { margin-bottom: 12px; }
-.mt-section-title { color: #6272a4; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
-.mt-section p { color: #aaa; font-size: 11px; line-height: 1.6; }
-.mt-tags { display: flex; flex-wrap: wrap; gap: 3px; }
-.mt-tag {
-  background: #252525;
-  color: #ff79c6;
-  padding: 1px 6px;
-  border-radius: 3px;
-  font-size: 10px;
-  border: 1px solid #3d3d3d;
-}
-
-/* Certs */
-.certs-title {
-  display: block;
-  color: #50fa7b;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 12px;
-  text-decoration: none;
-  transition: color 0.2s;
-}
-.certs-title:hover { color: #f1fa8c; }
-.certs-title::before { content: "# "; color: #6272a4; }
-
-.cert-card {
-  background: #1a1a1a;
-  border: 1px solid #2d2d2d;
-  border-radius: 6px;
-  padding: 10px 14px;
-  margin-bottom: 8px;
-}
-.cert-name { color: #e0e0e0; font-size: 11px; font-weight: bold; }
-.cert-date { color: #666; font-size: 10px; margin-top: 2px; }
-
-/* ── DIVIDER ── */
-.divider {
-  width: 1px;
-  background: linear-gradient(to bottom, transparent, rgba(80,250,123,0.15) 20%, rgba(80,250,123,0.15) 80%, transparent);
-  margin: 0 30px;
-  flex-shrink: 0;
-}
-
-/* ── POSTS ── */
-.posts-area { flex: 1; min-width: 0; }
-
-.posts-terminal-bar {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 20px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid #2d2d2d;
-  font-size: 13px;
-}
-.posts-terminal-bar .prompt { color: #50fa7b; }
-.posts-terminal-bar .cmd { color: #f1fa8c; }
-.posts-terminal-bar .cursor-blink {
-  display: inline-block;
-  width: 8px; height: 14px;
-  background: #e0e0e0;
-  vertical-align: middle;
-  animation: blink 1s step-end infinite;
-  margin-left: 2px;
-}
-@keyframes blink { 50% { opacity: 0; } }
-
-.post-card {
-  background: #1a1a1a;
-  border: 1px solid #2d2d2d;
-  border-radius: 6px;
-  padding: 18px 20px;
-  margin-bottom: 12px;
-  display: flex;
-  gap: 16px;
-  align-items: flex-start;
-  text-decoration: none;
-  transition: border-color 0.2s, background 0.2s;
-  cursor: pointer;
-}
-.post-card:hover { border-color: #50fa7b; background: #1f1f1f; }
-
-.post-main { flex: 1; min-width: 0; }
-.post-title {
-  color: #e0e0e0;
-  font-size: 15px;
-  font-weight: bold;
-  margin-bottom: 6px;
-  transition: color 0.2s;
-}
-.post-card:hover .post-title { color: #50fa7b; }
-.post-date { color: #555; font-size: 10px; margin-bottom: 8px; }
-.post-date span { color: #f1fa8c; }
-.post-summary { color: #888; font-size: 12px; line-height: 1.6; }
-
-.post-tags {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  flex-shrink: 0;
-  align-items: flex-end;
-  padding-top: 2px;
-}
-.post-tag {
-  background: #252525;
-  color: #ff79c6;
-  padding: 2px 8px;
-  border-radius: 3px;
-  font-size: 10px;
-  border: 1px solid #3d3d3d;
-  white-space: nowrap;
-}
-
-/* Pagination */
-.pagination {
-  display: flex;
-  gap: 8px;
-  margin-top: 24px;
-  align-items: center;
-}
-.pagination a, .pagination span {
-  color: #666;
-  font-size: 12px;
-  padding: 4px 10px;
-  border: 1px solid #2d2d2d;
-  border-radius: 4px;
-  text-decoration: none;
-  transition: all 0.2s;
-}
-.pagination a:hover { color: #50fa7b; border-color: #50fa7b; }
-.pagination .current { color: #50fa7b; border-color: #50fa7b; }
-
-.no-posts { color: #555; font-size: 13px; padding: 40px 0; }
-.no-posts span { color: #50fa7b; }
-
-@media (max-width: 768px) {
-  .blog-layout { flex-direction: column; }
-  .sidebar { width: 100%; padding-right: 0; }
-  .divider { width: 100%; height: 1px; margin: 20px 0;
-    background: linear-gradient(to right, transparent, rgba(80,250,123,0.15) 20%, rgba(80,250,123,0.15) 80%, transparent);
-  }
-}
-</style>
-
-<div class="blog-layout">
-
-  <!-- ── SIDEBAR ── -->
-  <aside class="sidebar">
-
-    <nav class="sidebar-nav">
-      <a href="/whoami">Whoami</a>
-    </nav>
-
-    <!-- Mini terminal -->
-    <div class="mini-terminal">
-      <div class="mini-terminal-header">
-        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
-        <span class="mini-terminal-title">dredd@blog: ~</span>
-      </div>
-      <div class="mini-terminal-body">
-        <div class="mt-prompt">$ <span>whoami --short</span></div>
-        <div class="mt-section">
-          <div class="mt-section-title"># sobre mí</div>
-          <p>Ingeniero de software. Red Team. Apasionado de la ciberseguridad ofensiva.</p>
-        </div>
-        <div class="mt-section">
-          <div class="mt-section-title"># skills</div>
-          <div class="mt-tags">
-            <span class="mt-tag">Red Team</span>
-            <span class="mt-tag">Directorio Activo</span>
-            <span class="mt-tag">Pentesting Web</span>
-            <span class="mt-tag">Research</span>
-            <span class="mt-tag">Despliegue de Infraestructura</span>
-          </div>
-        </div>
-      </div>
+<section class="hero-section">
+  <!-- Avatar a la izquierda -->
+  <div class="hero-avatar">
+    <img src="/images/avatar.png" alt="Dredd-13 Avatar" loading="eager">
+  </div>
+  
+  <!-- Contenido principal: ASCII + subtítulo + tags -->
+  <div class="hero-content">
+    <div class="ascii-wrapper" id="ascii-container">
+      <!-- ASCII Art normal (cyan) -->
+      <pre class="ascii-art ascii-normal" id="ascii-normal">
+██████╗ ██████╗ ███████╗██████╗ ██████╗       ██╗██████╗ 
+██╔══██╗██╔══██╗██╔════╝██╔══██╗██╔══██╗     ███║╚════██╗
+██║  ██║██████╔╝█████╗  ██║  ██║██║  ██║████╗╚██║ █████╔╝
+██║  ██║██╔══██╗██╔══╝  ██║  ██║██║  ██║╚═══╝ ██║ ╚═══██╗
+██████╔╝██║  ██║███████╗██████╔╝██████╔╝      ██║██████╔╝
+╚═════╝ ╚═╝  ╚═╝╚══════╝╚═════╝ ╚═════╝       ╚═╝╚═════╝ 
+      </pre>
+      <!-- ASCII Art binario (verde matrix) - generado por JS -->
+      <pre class="ascii-art ascii-binary" id="ascii-binary"></pre>
     </div>
-
-    <!-- Certs -->
-    <div class="certs-section">
-      <a href="/certificaciones" class="certs-title">Certificaciones</a>
-      <div class="cert-card">
-        <div class="cert-name">eJPT</div>
-        <div class="cert-date">Mayo 2025</div>
-      </div>
-      <div class="cert-card">
-        <div class="cert-name">eWPT</div>
-        <div class="cert-date">Diciembre 2025</div>
-      </div>
+    
+    <p class="hero-subtitle">
+      <span class="accent">›</span> Cybersecurity Researcher 
+      <span class="accent">|</span> Red Team 
+      <span class="accent">|</span> Pentesting
+    </p>
+    
+    <div class="hero-tags">
+      <span class="hero-tag">eJPT</span>
+      <span class="hero-tag">eWPT</span>
+      <span class="hero-tag">OSINT</span>
+      <span class="hero-tag">Bug Bounty</span>
     </div>
+  </div>
+</section>
 
-     <!-- Categorías -->
-    <div class="cats-section">
-      <a href="/tags" class="certs-title">Categorías</a>
-      {{ range .Site.Taxonomies.tags.ByCount }}
-      <div class="cert-card" style="cursor:pointer;" onclick="location.href='/tags/{{ .Page.Title | urlize }}'">
-        <div class="cert-name">{{ .Page.Title }}</div>
-        <div class="cert-date">{{ .Count }} {{ if eq .Count 1 }}post{{ else }}posts{{ end }}</div>
-      </div>
-      {{ end }}
-    </div>
+<div class="divider"></div>
 
-  </aside>
+<!-- ============================================
+     LISTA DE POSTS
+     Usando los partials nativos de PaperMod
+     ============================================ -->
 
-  <!-- ── DIVIDER ── -->
-  <div class="divider"></div>
-
-  <!-- ── POSTS ── -->
-  <main class="posts-area">
-    <div class="posts-terminal-bar">
-      <span class="prompt">dredd@blog:~$</span>
-      <span class="cmd">ls ./posts/</span>
-      <span class="cursor-blink"></span>
-    </div>
-
-    {{ $paginator := .Paginate (where .Site.RegularPages "Section" "posts") 5 }}
-    {{ if $paginator.Pages }}
-      {{ range $paginator.Pages }}
-      <a class="post-card" href="{{ .Permalink }}">
-        <div class="post-main">
-          <div class="post-title">{{ .Title }}</div>
-          <div class="post-date"><span>{{ .Date.Format "2006-01-02" }}</span></div>
-          {{ with .Description }}<div class="post-summary">{{ . }}</div>{{ end }}
-        </div>
-        {{ with .Params.tags }}
-        <div class="post-tags">
-          {{ range . }}<span class="post-tag">#{{ . }}</span>{{ end }}
-        </div>
-        {{ end }}
-      </a>
-      {{ end }}
-
-      <!-- Paginación -->
-      {{ if gt $paginator.TotalPages 1 }}
-      <div class="pagination">
-        {{ if $paginator.HasPrev }}
-          <a href="{{ $paginator.Prev.URL }}">← prev</a>
-        {{ end }}
-        {{ range $paginator.Pagers }}
-          {{ if eq . $paginator }}
-            <span class="current">{{ .PageNumber }}</span>
-          {{ else }}
-            <a href="{{ .URL }}">{{ .PageNumber }}</a>
-          {{ end }}
-        {{ end }}
-        {{ if $paginator.HasNext }}
-          <a href="{{ $paginator.Next.URL }}">next →</a>
-        {{ end }}
-      </div>
-      {{ end }}
-
-    {{ else }}
-      <div class="no-posts"><span>→</span> No hay posts aún...</div>
-    {{ end }}
-  </main>
-
+<div class="posts-section">
+  {{- $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
+  {{- $paginator := .Paginate $pages }}
+  
+  {{- range $index, $page := $paginator.Pages }}
+  <article class="post-entry">
+    <header class="entry-header">
+      <h2>
+        <a href="{{ .Permalink }}">{{ .Title }}</a>
+      </h2>
+    </header>
+    {{- if .Description }}
+    <section class="entry-content">
+      <p>{{ .Description }}</p>
+    </section>
+    {{- end }}
+    <footer class="entry-footer">
+      <span>{{ .Date.Format "January 2, 2006" }}</span>
+      {{- if .Params.tags }}
+      <span class="post-tags">
+        {{- range .Params.tags }}
+        <a href="{{ "tags/" | absURL }}{{ . | urlize }}/">#{{ . }}</a>
+        {{- end }}
+      </span>
+      {{- end }}
+    </footer>
+    <a class="entry-link" aria-label="post link to {{ .Title }}" href="{{ .Permalink }}"></a>
+  </article>
+  {{- end }}
+  
+  {{- if gt $paginator.TotalPages 1 }}
+  <nav class="pagination">
+    {{- if $paginator.HasPrev }}
+    <a class="prev" href="{{ $paginator.Prev.URL }}">« Anterior</a>
+    {{- end }}
+    {{- if $paginator.HasNext }}
+    <a class="next" href="{{ $paginator.Next.URL }}">Siguiente »</a>
+    {{- end }}
+  </nav>
+  {{- end }}
 </div>
-{{ end }}
+
+{{- end }}
