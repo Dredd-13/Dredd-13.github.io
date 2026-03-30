@@ -1,7 +1,3 @@
-/* ============================================
-   DREDD-13 CYBERPUNK THEME
-   Paleta: Cyan Eléctrico + Verde Matrix
-   ============================================ */
 
 /* === VARIABLES DE COLOR === */
 :root {
@@ -17,6 +13,7 @@
   --text-primary: #E8E6E3;
   --text-muted: #A4B1CD;
   --sidebar-width: 220px;
+  --main-width: 1000px;
 }
 
 /* === OVERRIDE PAPERMOD DARK THEME === */
@@ -131,7 +128,9 @@ code, pre, .ascii-art, .terminal-text, .terminal-body {
   flex: 1;
   margin-left: var(--sidebar-width);
   padding: 40px 60px;
-  max-width: 900px;
+  width: min(calc(100vw - var(--sidebar-width)), 1400px);
+  max-width: 1400px;
+  box-sizing: border-box;
 }
 
 /* ============================================
@@ -666,4 +665,6 @@ pre code {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+
+
 }
