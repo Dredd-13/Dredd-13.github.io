@@ -1,57 +1,85 @@
-<!-- ============================================
-     DREDD-13 BINARY WAVE EFFECT
-     Efecto de corrupción binaria estilo Matrix
-     Solo se carga en la homepage
-     ============================================ -->
-
 {{ if .IsHome }}
 <script>
+// ============================================
+// TOGGLE DE TEMA (claro/oscuro)
+// ============================================
 (function() {
-  'use strict';
+  const toggle = document.getElementById('theme-toggle');
+  if (!toggle) return;
   
-  const normalArt = document.getElementById('ascii-normal');
-  const binaryArt = document.getElementById('ascii-binary');
+  // Detectar tema actual
+  function getTheme() {
+    if (localStorage.getItem('theme')) {
+      return localStorage.getItem('theme');
+    }
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
   
-  if (!normalArt || !binaryArt) return;
+  // Aplicar tema
+  function setTheme(theme) {
+    document.documentElement.classList.remove('dark', 'light');
+    document.documentElement.classList.add(theme);
+    document.body.classList.remove('dark', 'light');
+    document.body.classList.add(theme);
+    localStorage.setItem('theme', theme);
+  }
   
-  const originalText = normalArt.textContent;
+  // Toggle al hacer clic
+  toggle.addEventListener('click', function() {
+    const currentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
+  });
+})();
+
+// ============================================
+// EFECTO ONDA BINARIA PARA ASCII ART
+// ============================================
+(function() {
+  const container = document.getElementById('ascii-container');
+  const asciiNormal = document.getElementById('ascii-normal');
+  const asciiBinary = document.getElementById('ascii-binary');
+  
+  if (!container || !asciiNormal || !asciiBinary) return;
+  
+  const originalText = asciiNormal.textContent;
   let animationId = null;
+  let startTime = null;
   
-  // Genera el texto binario con efecto de onda
-  function generateBinaryWave() {
-    const time = Date.now();
+  function generateBinaryWave(time) {
     let result = '';
+    let charIndex = 0;
     
     for (let i = 0; i < originalText.length; i++) {
       const char = originalText[i];
       
-      // Preservar espacios y saltos de línea
       if (char === ' ' || char === '\n') {
         result += char;
-        continue;
+      } else {
+        const wave = Math.sin((charIndex * 0.15) + (time * 0.004));
+        if (wave > 0.3) {
+          result += Math.random() > 0.5 ? '1' : '0';
+        } else {
+          result += char;
+        }
+        charIndex++;
       }
-      
-      // Efecto de onda: usa seno para crear patrón ondulante
-      const wave = Math.sin((time / 120) + (i / 4));
-      result += wave > 0 ? '1' : '0';
     }
     
     return result;
   }
   
-  // Loop de animación
-  function animate() {
-    binaryArt.textContent = generateBinaryWave();
+  function animate(timestamp) {
+    if (!startTime) startTime = timestamp;
+    const elapsed = timestamp - startTime;
+    
+    asciiBinary.textContent = generateBinaryWave(elapsed);
     animationId = requestAnimationFrame(animate);
   }
   
-  // Iniciar animación al hacer hover
-  const container = document.getElementById('ascii-container');
-  
   container.addEventListener('mouseenter', function() {
-    if (!animationId) {
-      animate();
-    }
+    startTime = null;
+    animationId = requestAnimationFrame(animate);
   });
   
   container.addEventListener('mouseleave', function() {
@@ -61,26 +89,18 @@
     }
   });
   
-  // Soporte para touch en móviles
+  // Soporte táctil
   container.addEventListener('touchstart', function() {
-    if (!animationId) {
-      animate();
-    }
-  }, { passive: true });
+    startTime = null;
+    animationId = requestAnimationFrame(animate);
+  });
   
   container.addEventListener('touchend', function() {
-    // Pequeño delay antes de detener en móviles
-    setTimeout(function() {
-      if (animationId) {
-        cancelAnimationFrame(animationId);
-        animationId = null;
-      }
-    }, 1000);
-  }, { passive: true });
-  
-  // Generar estado inicial
-  binaryArt.textContent = generateBinaryWave();
-  
+    if (animationId) {
+      cancelAnimationFrame(animationId);
+      animationId = null;
+    }
+  });
 })();
 </script>
 {{ end }}

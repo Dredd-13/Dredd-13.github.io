@@ -1,172 +1,200 @@
 {{- define "main" }}
 
-<div class="layout-wrapper">
-  <!-- ============================================
-       SIDEBAR - Navegación principal
-       ============================================ -->
-  <aside class="sidebar">
-    <nav class="sidebar-nav">
-      <a class="nav-item active" href="/">Whoami</a>
-      <a class="nav-item" href="/posts/">Blog</a>
-      <a class="nav-item" href="/ctfs/">CTFs</a>
-    </nav>
+<!-- ============================================
+     NAVBAR SUPERIOR - FULL WIDTH
+     ============================================ -->
+<nav class="top-navbar">
+  <!-- Toggle tema a la izquierda -->
+  <div class="nav-left">
+    <button id="theme-toggle" class="theme-toggle" title="Cambiar tema">
+      <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      </svg>
+      <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3"></line>
+        <line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line>
+        <line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+      </svg>
+    </button>
+  </div>
+  
+  <!-- Links centrados -->
+  <div class="nav-center">
+    <a href="/" class="nav-link active">Home</a>
+    <a href="/whoami/" class="nav-link">Whoami</a>
+    <a href="/posts/" class="nav-link">Blog</a>
+    <a href="/ctfs/" class="nav-link">CTFs</a>
+    <a href="/certs/" class="nav-link">Certs</a>
+  </div>
+  
+  <!-- Redes sociales a la derecha -->
+  <div class="nav-right">
+    <a href="https://github.com/dredd-13" target="_blank" rel="noopener" class="social-icon" title="GitHub">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+    </a>
+    <a href="https://linkedin.com/in/tu-perfil" target="_blank" rel="noopener" class="social-icon" title="LinkedIn">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+    </a>
+  </div>
+</nav>
+
+<!-- ============================================
+     HERO SECTION - DOS COLUMNAS
+     ============================================ -->
+<section class="hero-grid">
+  
+  <!-- COLUMNA IZQUIERDA: Avatar + ASCII + Tags -->
+  <div class="hero-left">
+    <div class="hero-avatar">
+      <img src="/images/avatar.png" alt="Dredd Avatar" loading="eager">
+    </div>
     
-    <div class="sidebar-footer">
-      <div class="social-links">
-        <a href="https://github.com/Dredd-13" target="_blank" rel="noopener" class="social-link" title="GitHub">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-        </a>
-        <a href="https://www.linkedin.com/in/josé-ángel-g-508032258/" target="_blank" rel="noopener" class="social-link" title="LinkedIn">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-        </a>
+    <div class="ascii-wrapper" id="ascii-container">
+      <pre class="ascii-art ascii-normal" id="ascii-normal">
+██████╗ ██████╗ ███████╗██████╗ ██████╗ 
+██╔══██╗██╔══██╗██╔════╝██╔══██╗██╔══██╗
+██║  ██║██████╔╝█████╗  ██║  ██║██║  ██║
+██║  ██║██╔══██╗██╔══╝  ██║  ██║██║  ██║
+██████╔╝██║  ██║███████╗██████╔╝██████╔╝
+╚═════╝ ╚═╝  ╚═╝╚══════╝╚═════╝ ╚═════╝ 
+      </pre>
+      <pre class="ascii-art ascii-binary" id="ascii-binary"></pre>
+    </div>
+    
+    <p class="hero-subtitle">
+      <span class="accent">›</span> Red Team 
+      <span class="accent">|</span> Pentesting 
+      <span class="accent">|</span> Offensive Infrastructure
+    </p>
+    
+    <div class="hero-tags">
+      <span class="led-tag">Active Directory</span>
+      <span class="led-tag">Web</span>
+      <span class="led-tag">OSINT</span>
+    </div>
+  </div>
+  
+  <!-- COLUMNA DERECHA: Terminal -->
+  <div class="hero-right">
+    <div class="terminal-container">
+      <div class="terminal-header">
+        <div class="terminal-dots">
+          <div class="terminal-dot dot-red"></div>
+          <div class="terminal-dot dot-yellow"></div>
+          <div class="terminal-dot dot-green"></div>
+        </div>
+        <span class="terminal-title">Terminal</span>
+      </div>
+      <div class="terminal-body">
+        <!-- cat /etc/motd -->
+        <div class="terminal-line">
+          <span class="prompt">dredd@kali:~$</span>
+          <span class="command"> cat /etc/motd</span>
+        </div>
+        <div class="motd-box">
+          <div class="motd-welcome">Bienvenido al blog de Dredd</div>
+          <div class="motd-desc">Cybersecurity Researcher | Red Team | Pentesting</div>
+          <div class="motd-desc">Documentando el camino en seguridad ofensiva.</div>
+        </div>
+        
+        <div class="terminal-spacer"></div>
+        
+        <!-- whoami -->
+        <div class="terminal-line">
+          <span class="prompt">dredd@kali:~$</span>
+          <span class="command"> whoami</span>
+        </div>
+        <div class="terminal-line">
+          <span class="output-green">Soy Jose (Dredd) Ingeniero de Software al que le encanta la investigación y la ciberseguridad ofensiva</span>
+        </div>
+        
+        <div class="terminal-spacer"></div>
+        
+        <!-- certs -->
+        <div class="terminal-line">
+          <span class="prompt">dredd@kali:~$</span>
+          <span class="command"> ls -la ~/certs/</span>
+        </div>
+        <div class="terminal-line certs-line">
+          <span class="cert-badge">eJPT</span>
+          <span class="cert-badge">eWPT</span>
+        </div>
+        
+        <div class="terminal-spacer"></div>
+        
+        <!-- cursor final -->
+        <div class="terminal-line">
+          <span class="prompt">dredd@kali:~$</span>
+          <span class="terminal-cursor"></span>
+        </div>
       </div>
     </div>
-  </aside>
+  </div>
+  
+</section>
 
-  <!-- ============================================
-       CONTENIDO PRINCIPAL
-       ============================================ -->
-  <main class="main-content">
-    
-    <!-- HERO SECTION -->
-    <section class="hero-section">
-      <div class="hero-avatar">
-        <img src="/images/avatar.png" alt="Dredd-13 Avatar" loading="eager">
-      </div>
-      
-      <div class="hero-content">
-        <div class="ascii-wrapper" id="ascii-container">
-          <pre class="ascii-art ascii-normal" id="ascii-normal">
-██████╗ ██████╗ ███████╗██████╗ ██████╗       ██╗██████╗ 
-██╔══██╗██╔══██╗██╔════╝██╔══██╗██╔══██╗     ███║╚════██╗
-██║  ██║██████╔╝█████╗  ██║  ██║██║  ██║████╗╚██║ █████╔╝
-██║  ██║██╔══██╗██╔══╝  ██║  ██║██║  ██║╚═══╝ ██║ ╚═══██╗
-██████╔╝██║  ██║███████╗██████╔╝██████╔╝      ██║██████╔╝
-╚═════╝ ╚═╝  ╚═╝╚══════╝╚═════╝ ╚═════╝       ╚═╝╚═════╝ 
-          </pre>
-          <pre class="ascii-art ascii-binary" id="ascii-binary"></pre>
-        </div>
-        
-        <p class="hero-subtitle">
-          <span class="accent">›</span> Red Team 
-          <span class="accent">|</span> Pentesting 
-          <span class="accent">|</span> Offensive Infrastructure
-        </p>
-        
-        <div class="hero-tags">
-          <span class="hero-tag">Active Directory</span>
-          <span class="hero-tag">Web</span>
-        </div>
-      </div>
-    </section>
+<!-- DIVIDER -->
+<div class="divider"></div>
 
-    <!-- TERMINAL WHOAMI -->
-    <section class="terminal-section">
-      <div class="terminal-container">
-        <div class="terminal-header">
-          <div class="terminal-dots">
-            <div class="terminal-dot dot-red"></div>
-            <div class="terminal-dot dot-yellow"></div>
-            <div class="terminal-dot dot-green"></div>
-          </div>
-          <span class="terminal-title">Terminal</span>
-        </div>
-        <div class="terminal-body">
-          <!-- cat /etc/motd -->
-          <div class="terminal-line">
-            <span class="prompt">dredd-13@kali:~$</span>
-            <span class="command"> cat /etc/motd</span>
-          </div>
-          <div class="motd-box">
-            <div class="motd-welcome">Bienvenido al blog de Dredd-13</div>
-            <div class="motd-desc">Cybersecurity Researcher | Red Team | Pentesting</div>
-            <div class="motd-desc">Documentando el camino en seguridad ofensiva.</div>
-          </div>
-          
-          <div class="terminal-spacer"></div>
-          
-          <!-- whoami -->
-          <div class="terminal-line">
-            <span class="prompt">dredd-13@kali:~$</span>
-            <span class="command"> whoami</span>
-          </div>
-          <div class="terminal-line">
-            <span class="output-green">Soy Jose (Dredd) Ingeniero de Software al que le encanta la investigación y la ciberseguridad ofensiva</span>
-          </div>
-          
-          <div class="terminal-spacer"></div>
-          
-          <!-- certs -->
-          <div class="terminal-line">
-            <span class="prompt">dredd-13@kali:~$</span>
-            <span class="command"> ls -la ~/certs/</span>
-          </div>
-          <div class="terminal-line certs-line">
-            <span class="cert-badge">eJPT</span>
-            <span class="cert-badge">eWPT</span>
-          </div>
-          
-          <div class="terminal-spacer"></div>
-          
-          <!-- cursor final -->
-          <div class="terminal-line">
-            <span class="prompt">dredd-13@kali:~$</span>
-            <span class="terminal-cursor"></span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <!-- LISTA DE POSTS -->
-    <section class="posts-section">
-      <h2 class="section-title">
-        <span class="accent">$</span> Últimos Posts
-      </h2>
-      
-      {{- $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
-      {{- $paginator := .Paginate $pages }}
-      
-      {{- range $index, $page := $paginator.Pages }}
-      <article class="post-entry">
-        <header class="entry-header">
-          <h2>
-            <a href="{{ .Permalink }}">{{ .Title }}</a>
-          </h2>
-        </header>
-        {{- if .Description }}
-        <section class="entry-content">
-          <p>{{ .Description }}</p>
-        </section>
-        {{- end }}
-        <footer class="entry-footer">
-          <span>{{ .Date.Format "January 2, 2006" }}</span>
-          {{- if .Params.tags }}
-          <span class="post-tags">
-            {{- range .Params.tags }}
-            <a href="{{ "tags/" | absURL }}{{ . | urlize }}/">#{{ . }}</a>
-            {{- end }}
-          </span>
+<!-- ============================================
+     ÚLTIMOS POSTS (máximo 2)
+     ============================================ -->
+<section class="posts-section">
+  <h2 class="section-title">
+    <span class="accent">$</span> Últimos Posts
+  </h2>
+  
+  {{- $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
+  {{- $paginator := .Paginate $pages 2 }}
+  
+  <div class="posts-grid">
+    {{- range $index, $page := $paginator.Pages }}
+    <article class="post-entry">
+      <header class="entry-header">
+        <h3>
+          <a href="{{ .Permalink }}">{{ .Title }}</a>
+        </h3>
+      </header>
+      {{- if .Description }}
+      <section class="entry-content">
+        <p>{{ .Description }}</p>
+      </section>
+      {{- end }}
+      <footer class="entry-footer">
+        <span class="entry-date">{{ .Date.Format "02 Jan 2006" }}</span>
+        {{- if .Params.tags }}
+        <span class="entry-tags">
+          {{- range .Params.tags }}
+          <a href="{{ "tags/" | absURL }}{{ . | urlize }}/">#{{ . }}</a>
           {{- end }}
-        </footer>
-        <a class="entry-link" aria-label="post link to {{ .Title }}" href="{{ .Permalink }}"></a>
-      </article>
-      {{- end }}
-      
-      {{- if gt $paginator.TotalPages 1 }}
-      <nav class="pagination">
-        {{- if $paginator.HasPrev }}
-        <a class="prev" href="{{ $paginator.Prev.URL }}">« Anterior</a>
+        </span>
         {{- end }}
-        {{- if $paginator.HasNext }}
-        <a class="next" href="{{ $paginator.Next.URL }}">Siguiente »</a>
-        {{- end }}
-      </nav>
-      {{- end }}
-    </section>
-    
-  </main>
-</div>
+      </footer>
+      <a class="entry-link" aria-label="post link to {{ .Title }}" href="{{ .Permalink }}"></a>
+    </article>
+    {{- end }}
+  </div>
+  
+  {{- if gt (len $pages) 2 }}
+  <div class="view-all">
+    <a href="/posts/" class="view-all-link">Ver todos los posts →</a>
+  </div>
+  {{- end }}
+</section>
+
+<!-- ============================================
+     FOOTER
+     ============================================ -->
+<footer class="site-footer">
+  <div class="footer-content">
+    <span>© 2026 Jose Angel (Dredd). All rights reserved.</span>
+  </div>
+</footer>
 
 {{- end }}
