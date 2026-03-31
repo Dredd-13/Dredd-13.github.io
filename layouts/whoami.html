@@ -1,0 +1,41 @@
+{{- define "main" }}
+
+<div class="whoami-page">
+  <div class="whoami-terminal">
+    <div class="terminal-header">
+      <div class="terminal-dots">
+        <div class="terminal-dot dot-red"></div>
+        <div class="terminal-dot dot-yellow"></div>
+        <div class="terminal-dot dot-green"></div>
+      </div>
+      
+      <span class="terminal-title">dredd@kali: ~/whoami</span>
+    </div>
+    <div class="terminal-body whoami-body">
+      
+      <!-- Comando inicial -->
+      <div class="terminal-line">
+        <span class="prompt">dredd@kali:~$</span>
+        <span class="command"> cat whoami.txt</span>
+      </div>
+      
+      <div class="terminal-spacer"></div>
+      
+      <!-- Contenido del markdown -->
+      <div class="whoami-content">
+        {{ .Content }}
+      </div>
+      
+      <div class="terminal-spacer"></div>
+      
+      <!-- Cursor final -->
+      <div class="terminal-line">
+        <span class="prompt">dredd@kali:~$</span>
+        <span class="terminal-cursor"></span>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+{{- end }}

@@ -28,5 +28,8 @@ La arquitectura implementa **aislamiento por función** — cada capacidad ofens
 
 En la siguiente imagen se puede ver como quedaría una infraestructura completa y modular para abordar un ejercicio de Red Team.
 
+
 ![Estructura de Infraestructura](/images/post-1/imagen_infra.png)
+
+
 

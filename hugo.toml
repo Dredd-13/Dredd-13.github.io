@@ -8,3 +8,10 @@ theme = "PaperMod"
   defaultTheme = "dark"
   ShowToc = true
   TocOpen= true
+
+ [params.maintenance]
+    enabled = false           # true = TODO el sitio en mantenimiento
+    sections = []            # Secciones específicas: ["posts", "certs", "ctfs"]
+
+[markup.highlight]
+  style = "dracula"

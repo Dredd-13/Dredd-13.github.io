@@ -1,0 +1,47 @@
+{{- define "main" }}
+
+<div class="whoami-page">
+  <div class="terminal-container whoami-terminal">
+    <div class="terminal-header">
+      <div class="terminal-dots">
+        <div class="terminal-dot dot-red"></div>
+        <div class="terminal-dot dot-yellow"></div>
+        <div class="terminal-dot dot-green"></div>
+      </div>
+      <span class="terminal-title">dredd@kali: ~/certs/{{ .File.BaseFileName }}</span>
+    </div>
+    <div class="terminal-body">
+      
+      <div class="terminal-line">
+        <span class="prompt">dredd@kali:~$</span>
+        <span class="command"> xdg-open ~/certs/{{ .File.BaseFileName }}.png</span>
+      </div>
+      
+      <div class="terminal-spacer"></div>
+      
+      {{- if .Params.cover.image }}
+      <div class="cert-display">
+        <img src="{{ .Params.cover.image }}" alt="{{ .Title }}">
+      </div>
+      {{- end }}
+      
+      <div class="terminal-spacer"></div>
+      
+      <div class="terminal-line">
+        <span class="prompt">dredd@kali:~$</span>
+        <span class="command"> file {{ .File.BaseFileName }}.png</span>
+      </div>
+      <div class="output">{{ .Title }}: {{ .Description }}</div>
+      
+      <div class="terminal-spacer"></div>
+      
+      <div class="terminal-line">
+        <span class="prompt">dredd@kali:~$</span>
+        <span class="terminal-cursor"></span>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+{{- end }}

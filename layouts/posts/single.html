@@ -1,0 +1,47 @@
+{{- define "main" }}
+
+<article class="post-single">
+  
+  <!-- Header del post -->
+  <header class="post-header">
+    <h1 class="post-title">{{ .Title }}</h1>
+    {{- if .Description }}
+    <p class="post-description">{{ .Description }}</p>
+    {{- end }}
+    <div class="post-meta">
+      <span>{{ .Date.Format "January 02, 2006" }}</span>
+      <span>·</span>
+      <span>{{ .ReadingTime }} min read</span>
+    </div>
+  </header>
+
+  <!-- Imagen de portada -->
+  {{- if .Params.cover.image }}
+  <figure class="post-cover">
+    <img src="{{ .Params.cover.image }}" alt="{{ .Title }}">
+  </figure>
+  {{- end }}
+
+  <!-- Layout con ToC lateral -->
+  <div class="post-layout">
+    
+    <!-- Contenido principal -->
+    <div class="post-content">
+      {{ .Content }}
+    </div>
+    
+    <!-- ToC lateral derecho -->
+    {{- if .TableOfContents }}
+    <aside class="post-toc">
+      <div class="toc-container">
+        <h4 class="toc-title">Contenido</h4>
+        {{ .TableOfContents }}
+      </div>
+    </aside>
+    {{- end }}
+    
+  </div>
+
+</article>
+
+{{- end }}

@@ -30,3 +30,4 @@ En la siguiente imagen se puede ver como quedaría una infraestructura completa 
 
 ![Estructura de Infraestructura](/images/post-1/imagen_infra.png)
 
+

@@ -1,39 +1,39 @@
-{{ if .IsHome }}
+
+
 <script>
-// ============================================
-// TOGGLE DE TEMA (claro/oscuro)
-// ============================================
-(function() {
+
+  (function() {
   const toggle = document.getElementById('theme-toggle');
   if (!toggle) return;
   
-  // Detectar tema actual
-  function getTheme() {
-    if (localStorage.getItem('theme')) {
-      return localStorage.getItem('theme');
-    }
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  }
+  const html = document.documentElement;
+  const iconDark = document.getElementById('icon-dark');
+  const iconLight = document.getElementById('icon-light');
   
-  // Aplicar tema
-  function setTheme(theme) {
-    document.documentElement.classList.remove('dark', 'light');
-    document.documentElement.classList.add(theme);
-    document.body.classList.remove('dark', 'light');
-    document.body.classList.add(theme);
-    localStorage.setItem('theme', theme);
-  }
+  // Cargar tema guardado o usar dark por defecto
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  html.classList.toggle('dark', savedTheme === 'dark');
+  updateIcons();
   
-  // Toggle al hacer clic
   toggle.addEventListener('click', function() {
-    const currentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    setTheme(newTheme);
+    html.classList.toggle('dark');
+    const isDark = html.classList.contains('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    updateIcons();
   });
+  
+  function updateIcons() {
+    const isDark = html.classList.contains('dark');
+    if (iconDark) iconDark.style.display = isDark ? 'none' : 'block';
+    if (iconLight) iconLight.style.display = isDark ? 'block' : 'none';
+  }
 })();
 
+</script>
+{{ if .IsHome }}
+<script>
 // ============================================
-// EFECTO ONDA BINARIA PARA ASCII ART
+// ONDA BINARIA ASCII ART
 // ============================================
 (function() {
   const container = document.getElementById('ascii-container');
@@ -56,8 +56,8 @@
       if (char === ' ' || char === '\n') {
         result += char;
       } else {
-        const wave = Math.sin((charIndex * 0.15) + (time * 0.004));
-        if (wave > 0.3) {
+        const wave = Math.tan((charIndex * 0.05) + (time * 0.0025));
+        if (wave > 0.01) {
           result += Math.random() > 0.5 ? '1' : '0';
         } else {
           result += char;

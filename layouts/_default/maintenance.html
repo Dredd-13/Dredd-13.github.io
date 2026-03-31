@@ -1,0 +1,64 @@
+{{- define "main" }}
+
+<div class="maintenance-page">
+  <div class="terminal-container maintenance-terminal">
+    <div class="terminal-header">
+      <div class="terminal-dots">
+        <div class="terminal-dot dot-red"></div>
+        <div class="terminal-dot dot-yellow"></div>
+        <div class="terminal-dot dot-green"></div>
+      </div>
+      <span class="terminal-title">dredd@kali: ~/maintenance</span>
+    </div>
+    <div class="terminal-body">
+      
+      <div class="terminal-line">
+        <span class="prompt">dredd@kali:~$</span>
+        <span class="command"> ./check_status.sh</span>
+      </div>
+      
+      <pre class="maintenance-ascii">
+  ___  ___ ___ _    ___ _  _ ___ 
+ / _ \| __| __| |  |_ _| \| | __|
+| (_) | _|| _|| |__ | || .` | _| 
+ \___/|_| |_| |____|___|_|\_|___|
+                                 
+</pre>
+      
+      <div class="terminal-line">
+        <span class="output-yellow">[!] Sistema en mantenimiento</span>
+      </div>
+      
+      <div class="terminal-line">
+        <span class="output">Se están realizando mejoras en esta sección.</span>
+      </div>
+      <div class="terminal-line">
+        <span class="output">Vuelve pronto para ver el contenido actualizado.</span>
+      </div>
+      
+      <div class="terminal-spacer"></div>
+      
+      <div class="terminal-line">
+        <span class="prompt">dredd@kali:~$</span>
+        <span class="command"> eta --estimado</span>
+      </div>
+      <div class="terminal-line">
+        <span class="output-green">Muy Pronto™</span>
+      </div>
+      
+      <div class="terminal-spacer"></div>
+      
+      <div class="terminal-line">
+        <span class="prompt">dredd@kali:~$</span>
+        <span class="terminal-cursor"></span>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="maintenance-back">
+    <a href="/" class="back-link">← Volver al inicio</a>
+  </div>
+</div>
+
+{{- end }}
