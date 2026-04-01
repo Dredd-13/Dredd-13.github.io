@@ -10,13 +10,26 @@ cover:
     image: "/images/post-1/portada-post.png"
 ---
 
-## Principio de separación funcional
+# Principio de separación funcional
 
 La arquitectura implementa **aislamiento por función** — cada capacidad ofensiva (entrega de payloads, comando y control, phishing) opera en su propio canal independiente. Este patrón está documentado en operaciones de APT41/Winnti: si un nodo es "quemado" (detectado y atribuido), el blast radius se contiene a esa función específica. El C2 puede seguir operando aunque el servidor de phishing sea identificado.
 
+## **Subtitulo**
+
+holahola *hola* _hola_ **hola**
+
+### Subsubtitulo
+
+holahola *hola* _hola_ **hola**
+
+#### subsubsubtitulo
+
+##### subsubsubsubtitulo
 
 
-## Capas de abstracción
+# Capas de abstracción
+
+
 
 **Máquina Atacante (Kali)**: Es tu único punto de entrada a toda la infraestructura. Los firewalls de cada redirector están configurados para aceptar conexiones SSH _exclusivamente_ desde esta IP. Esto replica controles de perímetro empresarial aplicados de manera ofensiva.
 
@@ -29,4 +42,9 @@ La arquitectura implementa **aislamiento por función** — cada capacidad ofens
 En la siguiente imagen se puede ver como quedaría una infraestructura completa y modular para abordar un ejercicio de Red Team.
 
 ![Estructura de Infraestructura](/images/post-1/imagen_infra.png)
+
+## Capa de abs 1
+
+### Capa de abs 1
+
 

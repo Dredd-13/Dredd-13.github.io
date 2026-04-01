@@ -1,7 +1,7 @@
 {{- define "main" }}
 
 <div class="whoami-page">
-  <div class="terminal-container whoami-terminal">
+  <div class="terminal-container whoami-terminal" style="max-width: 900px; width: 90%; margin: 0 auto;">
     <div class="terminal-header">
       <div class="terminal-dots">
         <div class="terminal-dot dot-red"></div>
@@ -20,8 +20,8 @@
       <div class="terminal-spacer"></div>
       
       {{- if .Params.cover.image }}
-      <div class="cert-display">
-        <img src="{{ .Params.cover.image }}" alt="{{ .Title }}">
+      <div style="display: flex; justify-content: center; padding: 10px 0;">
+        <img src="{{ .Params.cover.image }}" alt="{{ .Title }}" style="max-width: 100%; max-height: 550px; height: auto; border-radius: 4px;">
       </div>
       {{- end }}
       

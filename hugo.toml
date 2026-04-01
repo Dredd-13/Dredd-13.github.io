@@ -10,8 +10,13 @@ theme = "PaperMod"
   TocOpen= true
 
  [params.maintenance]
-    enabled = true           # true = TODO el sitio en mantenimiento
-    sections = ["ctfs"]            # Secciones específicas: ["posts", "certs", "ctfs"]
+    enabled = false           # true = TODO el sitio en mantenimiento
+    sections = []            # Secciones específicas: ["posts", "certs", "ctfs"]
 
 [markup.highlight]
   style = "dracula"
+
+[markup.tableOfContents]
+  startLevel = 1
+  endLevel = 6
+  ordered = false

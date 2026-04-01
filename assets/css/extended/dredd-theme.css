@@ -843,6 +843,20 @@ pre code {
   border-radius: 0 8px 8px 0;
 }
 
+/* Post single - header alineado a la izquierda */
+.post-single .post-header,
+.post-single .post-title,
+.post-single .post-description,
+.post-single .post-meta {
+  text-align: left;
+}
+
+/* PaperMod lo centra con !important, forzar */
+.post-content h1,
+article header {
+  text-align: left !important;
+}
+
 /* ============================================
    POST SINGLE - Indice lateral por Post
    ============================================ */
@@ -892,7 +906,7 @@ pre code {
 /* Layout: contenido + ToC */
 .post-layout {
   display: grid;
-  grid-template-columns: 1fr 250px;
+  grid-template-columns: 1fr 300px;
   gap: 60px;
   align-items: start;
 }
@@ -1035,6 +1049,36 @@ pre code {
 }
 
 /* ============================================
+   TOC - INDENTACIÓN POR NIVELES
+   ============================================ */
+
+/* Nivel 2 (##) - sin indentación */
+.post-toc nav > ul > li {
+  margin-left: 0;
+}
+
+/* Nivel 3 (###) - indentado */
+.post-toc nav > ul > li > ul > li {
+  margin-left: 12px;
+  padding-left: 8px;
+  border-left: 1px solid rgba(24, 224, 255, 0.2);
+}
+
+/* Nivel 4 (####) - más indentado */
+.post-toc nav > ul > li > ul > li > ul > li {
+  margin-left: 12px;
+  padding-left: 8px;
+  border-left: 1px solid rgba(24, 224, 255, 0.15);
+}
+
+/* Nivel 5 (#####) - aún más indentado */
+.post-toc nav > ul > li > ul > li > ul > li > ul > li {
+  margin-left: 12px;
+  padding-left: 8px;
+  border-left: 1px solid rgba(24, 224, 255, 0.1);
+}
+
+/* ============================================
    RESPONSIVE
    ============================================ */
 
@@ -1105,22 +1149,12 @@ pre code {
    Iconos
    ============================================ */
 .htb-icon svg {
-  fill: none;
-  stroke: var(--cyan-electric);
-  opacity: 0.7;
   transition: all 0.2s ease;
 }
 
-.htb-icon svg path {
-  fill: none;
-  stroke: var(--cyan-electric);
-}
-
-.htb-icon:hover svg,
 .htb-icon:hover svg path {
-  opacity: 1;
   stroke: #9FEF00;
-  filter: drop-shadow(0 0 6px rgba(159, 239, 0, 0.5));
+  filter: drop-shadow(0 0 6px rgba(159, 239, 0, 0.6));
 }
 
 /* ============
@@ -1241,6 +1275,112 @@ pre code {
   .maintenance-ascii {
     font-size: 0.35rem;
   }
+}
+
+/* ============================================
+   PAGINACIÓN
+   ============================================ */
+
+.pagination {
+  margin-top: 60px;
+  padding-top: 30px;
+  border-top: 1px solid rgba(24, 224, 255, 0.1);
+}
+
+.pagination-info {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+}
+
+.pagination-info .prompt {
+  color: var(--cyan-electric);
+}
+
+.pagination-info .command {
+  color: var(--text-primary);
+}
+
+.pagination-info .output-muted {
+  color: var(--green-matrix);
+  margin-left: 5px;
+}
+
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.page-link {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  padding: 6px 12px;
+  color: var(--text-muted);
+  text-decoration: none;
+  border: 1px solid rgba(24, 224, 255, 0.2);
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.page-link:hover {
+  color: var(--cyan-electric);
+  border-color: var(--cyan-electric);
+  background: rgba(24, 224, 255, 0.05);
+}
+
+.page-current {
+  color: var(--bg-deep);
+  background: var(--cyan-electric);
+  border-color: var(--cyan-electric);
+}
+
+.page-prev,
+.page-next {
+  color: var(--cyan-electric);
+  border-color: var(--cyan-electric);
+}
+
+/* ============================================
+   POST SINGLE - FORZAR ALINEACIÓN IZQUIERDA
+   ============================================ */
+
+/* Header del post */
+.post-single header.post-header {
+  text-align: left !important;
+  max-width: 800px;
+}
+
+.post-single .post-title {
+  text-align: left !important;
+}
+
+.post-single .post-description {
+  text-align: left !important;
+}
+
+.post-single .post-meta {
+  justify-content: flex-start !important;
+}
+
+/* Por si PaperMod usa otras clases */
+article.post-single header,
+article.post-single header h1,
+article.post-single header .post-description,
+.entry-header,
+.entry-header h1 {
+  text-align: left !important;
+}
+
+/* Asegurar que el contenedor no centre */
+.post-single {
+  display: block;
+}
+
+.post-single > header {
+  margin-left: 0;
+  margin-right: auto;
 }
 
 

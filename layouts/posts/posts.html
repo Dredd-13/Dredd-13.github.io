@@ -1,6 +1,6 @@
 {{- define "main" }}
 
-<div class="blog-page">
+<div class="blog-page" style="max-width: 1200px; margin: 0 auto; padding: 40px 20px;">
   
   <!-- Header del blog -->
   <div class="blog-header">
@@ -18,7 +18,8 @@
   
   <!-- Grid de posts -->
   <div class="blog-grid">
-    {{- range .Pages }}
+    {{- $paginator := .Paginate .Pages 10 }}
+    {{- range $paginator.Pages }}
     <article class="blog-card">
       <!-- Header estilo terminal -->
       <div class="card-terminal-header">
@@ -95,6 +96,44 @@
     {{- end }}
   </div>
   
+<!-- Paginación -->
+{{- $paginator := .Paginator }}
+{{- if gt $paginator.TotalPages 1 }}
+<nav style="margin-top: 50px; padding-top: 25px; border-top: 1px solid rgba(24, 224, 255, 0.15);">
+  
+  <!-- Comando -->
+  <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; margin-bottom: 8px;">
+    <span style="color: #18E0FF;">[dredd@blog]$</span>
+    <span style="color: #E8E6E3;"> ls -la pages/</span>
+  </div>
+  
+  <!-- Output -->
+  <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: #00ff41; margin-bottom: 20px;">
+    Mostrando página {{ $paginator.PageNumber }} de {{ $paginator.TotalPages }}
+  </div>
+  
+  <!-- Controles -->
+  <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+    {{- if $paginator.HasPrev }}
+    <a href="{{ $paginator.Prev.URL }}" style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; padding: 4px 10px; color: #18E0FF; text-decoration: none; border: 1px solid rgba(24, 224, 255, 0.4); border-radius: 3px;">← prev</a>
+    {{- end }}
+    
+    {{- range $paginator.Pagers }}
+      {{- if eq . $paginator }}
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; padding: 4px 8px; color: #080b10; background: #18E0FF; border-radius: 3px;">{{ .PageNumber }}</span>
+      {{- else }}
+      <a href="{{ .URL }}" style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; padding: 4px 8px; color: #A4B1CD; text-decoration: none; border: 1px solid rgba(164, 177, 205, 0.3); border-radius: 3px;">{{ .PageNumber }}</a>
+      {{- end }}
+    {{- end }}
+    
+    {{- if $paginator.HasNext }}
+    <a href="{{ $paginator.Next.URL }}" style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; padding: 4px 10px; color: #18E0FF; text-decoration: none; border: 1px solid rgba(24, 224, 255, 0.4); border-radius: 3px;">next →</a>
+    {{- end }}
+  </div>
+  
+</nav>
+{{- end }}
+
 </div>
 
 {{- end }}

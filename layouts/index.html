@@ -98,11 +98,11 @@
     <span class="accent">$</span> Últimos Posts
   </h2>
   
-  {{- $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
-  {{- $paginator := .Paginate $pages 2 }}
+  {{- $posts := where site.RegularPages "Section" "posts" }}
+  {{- $latestPosts := first 2 $posts }}
   
  <div class="blog-grid">
-  {{- range $index, $page := $paginator.Pages }}
+   {{- range $latestPosts }}
   <article class="blog-card">
     <div class="card-terminal-header">
       <div class="terminal-dots">
@@ -164,7 +164,7 @@
   {{- end }}
 </div>
   
-  {{- if gt (len $pages) 2 }}
+  {{- if gt (len $posts) 2 }}
   <div class="view-all">
     <a href="/posts/" class="view-all-link">Ver todos los posts →</a>
   </div>
